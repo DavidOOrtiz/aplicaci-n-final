@@ -1,0 +1,23 @@
+@startuml
+
+actor Cliente as cliente
+usecase (Seleccionar fecha para cita) as seleccionarFechas
+cliente -up-> seleccionarFechas
+
+usecase (Ingresar datos cliente para cita) as ingresarDatoCita
+usecase (Ingresar que tipo ortodoncia) as ingresarTipoOrtodoncia
+
+usecase (Ingresar hora de cita) as ingresarHoraCita
+cliente -> ingresarDatoCita
+
+seleccionarFechas -right-> ingresarTipoOrtodoncia
+ingresarTipoOrtodoncia -> ingresarHoraCita
+
+
+
+
+
+
+
+
+@enduml

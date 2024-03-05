@@ -1,0 +1,25 @@
+@startuml
+
+class cliente{
+    string numeroDeTelefono
+    string nombreCompleto
+    string email
+}
+
+class tipoortodoncia{
+    string tipoOrtodoncia
+}
+
+class cita{
+    int hora
+}
+
+class reserva{
+    date fecha
+    int numeroClientes
+}
+
+cliente o-- reserva
+cita *-- reserva 
+cliente o-- tipoortodoncia 
+@enduml
