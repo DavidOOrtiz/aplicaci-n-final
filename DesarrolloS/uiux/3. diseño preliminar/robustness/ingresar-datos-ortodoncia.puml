@@ -1,0 +1,78 @@
+@startuml
+
+actor Cliente as cliente
+boundary "FE Pantalla 'Fecha de cita'" as fePantallaDatosDeCita
+
+cliente -> fePantallaDatosDeCita
+
+control "Ingresar fecha cita" as ingresarFechaCita
+
+fePantallaDatosDeCita -up-> ingresarFechaCita
+
+control "Validar fecha cita" as validarFecha
+
+ingresarFechaCita -right-> validarFecha
+
+boundary "Mostrar error" as error
+
+validarFecha -up-> error: Mostrar error
+
+
+
+control "BE obtener tipo" as beObtenerTipo
+
+fePantallaDatosDeCita -up-> beObtenerTipo
+
+entity tiposOrtodoncia as entitytiposOrtodoncia
+
+entitytiposOrtodoncia -> beObtenerTipo
+
+boundary "FE Tipos ortodoncia" as feTiposOrtodoncia
+
+beObtenerTipo -> feTiposOrtodoncia
+
+control "Ingresar hora cita" as ingresarHoraCita
+
+fePantallaDatosDeCita -right-> ingresarHoraCita
+
+control "BE obtener hora" as beHora
+
+fePantallaDatosDeCita -right-> beHora
+
+entity horas as entityHoras
+
+entityHoras -up-> beHora
+
+boundary "FE hora" as feHoras
+
+beHora -right-> feHoras
+
+control "Validar hora" as validarHora
+
+ingresarHoraCita -right-> validarHora
+
+boundary "Mostrar error" as errorCita
+
+validarHora -down-> errorCita: Mostrar error
+
+
+
+control "Clic en Boton 'Confirmar'" as botonConfirmar
+
+fePantallaDatosDeCita -down-> botonConfirmar
+
+control "Guardar datos de la cita" as guardarDatosCita
+
+botonConfirmar -left-> guardarDatosCita
+
+usecase (Ingresar datos cliente) as seleccionarDatos
+
+guardarDatosCita -down-> seleccionarDatos
+usecase " "
+
+entity datosDeCita as entityDatosDeCita
+
+guardarDatosCita -> entityDatosDeCita
+
+
+@enduml

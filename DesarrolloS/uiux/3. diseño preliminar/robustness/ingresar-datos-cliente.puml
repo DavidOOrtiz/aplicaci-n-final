@@ -1,0 +1,36 @@
+@startuml
+
+actor Cliente as cliente
+
+boundary "FE Pantalla 'Ingresar datos cliente'" as fePantallaDatosCliente
+
+cliente -> fePantallaDatosCliente
+
+control "Ingresar Nombre" as ingresarNombre
+
+fePantallaDatosCliente -up-> ingresarNombre
+
+control "Ingresar número de teléfono" as ingresarNumeroTelefono
+
+fePantallaDatosCliente -right-> ingresarNumeroTelefono
+
+control "Ingresar email" as ingresarEmail
+
+fePantallaDatosCliente -left-> ingresarEmail
+
+control "Clic en Boton 'Confirmar'" as botonConfirmar
+
+fePantallaDatosCliente -down-> botonConfirmar
+
+control "Guardar datos del cliente" as guardarDatosCliente
+
+botonConfirmar -left-> guardarDatosCliente
+
+entity datosCliente as entityDatosCliente
+
+guardarDatosCliente -left-> entityDatosCliente
+
+
+
+
+@enduml
