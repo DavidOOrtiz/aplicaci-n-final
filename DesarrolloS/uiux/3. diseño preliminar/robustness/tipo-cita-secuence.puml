@@ -1,0 +1,37 @@
+
+@startuml
+
+actor "Cliente" as actorCliente
+boundary "<<Pantalla>>\nDatosDeCita" as boundryPantallaDatosDeCita
+
+actorCliente -> boundryPantallaDatosDeCita
+activate boundryPantallaDatosDeCita
+    boundryPantallaDatosDeCita -> boundryPantallaDatosDeCita: getTiposCita()
+    activate boundryPantallaDatosDeCita
+        control "TiposCitaController" as tiposCitaController
+            control "TiposCitaModel" as tiposCitaModel
+            boundryPantallaDatosDeCita -> tiposCitaController: GET api/v1/tiposCita: Tipos[]
+            activate tiposCitaController
+                tiposCitaController -> tiposCitaModel: getallTiposCita()
+                activate tiposCitaModel
+                    database "clinicaOrtodoncia_db" as dbClinica
+                    entity tipoCita
+                    
+                    activate tiposCitaModel
+                        activate tiposCitaModel
+                            tiposCitaModel -> dbClinica: SQL query
+                            dbClinica -> tipoCita
+                            dbClinica -> tiposCitaModel: {id, TipoCita}
+                        deactivate
+
+                    deactivate
+                deactivate tiposCitaModel
+            deactivate tiposCitaController
+        deactivate boundryPantallaDatosDeCita
+    deactivate boundryPantallaDatosDeCita
+deactivate actorCliente
+
+@enduml
+
+
+
