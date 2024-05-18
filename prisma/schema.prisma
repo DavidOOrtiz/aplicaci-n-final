@@ -1,0 +1,19 @@
+// prisma/schema.prisma
+datasource mysql {
+  provider = "mysql"
+  url      = env("MYSQL_DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Tipo {
+  id       Int    @id @default(autoincrement())
+  TipoCita String
+}
+
+model Hora {
+  id       Int    @id @default(autoincrement())
+  Hora String
+}

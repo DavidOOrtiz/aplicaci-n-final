@@ -1,0 +1,36 @@
+
+@startuml
+
+actor "Cliente" as actorCliente
+boundary "<<Pantalla>>\nDatosDeCita" as boundryPantallaDatosDeCita
+
+actorCliente -> boundryPantallaDatosDeCita
+activate boundryPantallaDatosDeCita
+    boundryPantallaDatosDeCita -> boundryPantallaDatosDeCita: getHoraCita()
+    activate boundryPantallaDatosDeCita
+        control "HorasCitaController" as horasCitaController
+            control "HorasCitaModel" as horasCitaModel
+            boundryPantallaDatosDeCita -> horasCitaController: GET api/v1/horas: Horas[]
+            activate horasCitaController
+                horasCitaController -> horasCitaModel: getallHoras()
+                activate horasCitaModel
+                    database "clinica_db" as dbClinica
+                    entity horaCita
+                    
+                    activate horasCitaModel
+                        activate horasCitaModel
+                            horasCitaModel -> dbClinica: SQL query
+                            dbClinica -> horaCita
+                            dbClinica -> horasCitaModel: {id, Hora}
+                        deactivate
+
+                    deactivate
+                deactivate horasCitaModel
+            deactivate horasCitaController
+        deactivate boundryPantallaDatosDeCita
+    deactivate boundryPantallaDatosDeCita
+deactivate actorCliente
+
+@enduml
+
+

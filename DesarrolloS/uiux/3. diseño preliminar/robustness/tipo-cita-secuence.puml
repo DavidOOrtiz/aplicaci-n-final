@@ -10,11 +10,11 @@ activate boundryPantallaDatosDeCita
     activate boundryPantallaDatosDeCita
         control "TiposCitaController" as tiposCitaController
             control "TiposCitaModel" as tiposCitaModel
-            boundryPantallaDatosDeCita -> tiposCitaController: GET api/v1/tiposCita: Tipos[]
+            boundryPantallaDatosDeCita -> tiposCitaController: GET api/v1/tipos: Tipos[]
             activate tiposCitaController
                 tiposCitaController -> tiposCitaModel: getallTiposCita()
                 activate tiposCitaModel
-                    database "clinicaOrtodoncia_db" as dbClinica
+                    database "clinica_db" as dbClinica
                     entity tipoCita
                     
                     activate tiposCitaModel
